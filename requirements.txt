@@ -1,0 +1,11 @@
+langchain==0.1.14
+langchain_google_genai==1.0.1
+librosa==0.10.1
+Pillow==10.3.0
+protobuf>=3.20
+PyPDF2==3.0.1
+python-dotenv==1.0.1
+streamlit==1.32.2
+torch==2.2.2
+transformers==4.39.3
+faiss-cpu==1.8.0
