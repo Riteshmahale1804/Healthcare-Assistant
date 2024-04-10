@@ -128,7 +128,6 @@ def user_input(user_question, pdf_docs, prompt):
 
 # Main function to run the Streamlit app
 def main():
-    st.set_page_config(page_title="Healthcare App")
     st.header("**Welcome to the Healthcare App**")
     st.markdown("**Ask any query related to the provided document**")
         
