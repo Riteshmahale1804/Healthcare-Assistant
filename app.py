@@ -101,7 +101,7 @@ def input_image_setup(uploaded_file):
         {context}
         Question:
         {question}
-        Answer:"""
+        Answer:   """
         prompt = PromptTemplate(template=prompt_template, input_variables=["context", "question"])
         chain = load_qa_chain(model, chain_type="stuff", prompt=prompt)
         return chain
