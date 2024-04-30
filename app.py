@@ -87,18 +87,22 @@ def input_image_setup(uploaded_file):
         return None
 
 # Function to create conversational chain for PDF documents
-def get_conversational_chain(prompt):
-    try:
-        model = ChatGoogleGenerativeAI(model="gemini-1.5-pro-latest", temperature=0.7)
-        prompt_template = """
-            Analyze the uploaded PDF document to provide comprehensive responses to user queries related to its content. 
-            Ensure accuracy and thoroughness in addressing medical assistance inquiries. If asked for a summary,
-            offer detailed insights highlighting key points rather than exhaustive responses. Remember to thoroughly analyze user questions 
-            and include all relevant details from the document in your answers.
-              """
-
-        prompt_template_with_context = f"{prompt_template}\n\n{prompt}"
-        prompt = PromptTemplate(template=prompt_template_with_context, input_variables=["context", "question"])
+ prompt_template = """
+            The document highlights the importance of thorough responses in medical supervision, emphasizing
+            the need to analyze user queries comprehensively. It stresses the inclusion of all relevant details
+            and addressing related topics to ensure effective support. When summarizing, focus on key insights
+            rather than exhaustive responses. Overall, meticulous responses are vital for providing accurate
+            medical assistance.. 
+            Provide detailed answers to questions related to any uploaded PDF document.
+            Ensure comprehensive responses by analyzing user queries thoroughly and including all relevant details.
+            Additionally, when asked for a summary, offer a detailed summary with key insights instead of exhaustive responses. 
+            Accuracy and thoroughness are essential for effective support in providing medical assistance. 
+        Context:
+        {context}
+        Question:
+        {question}
+        Answer:"""
+        prompt = PromptTemplate(template=prompt_template, input_variables=["context", "question"])
         chain = load_qa_chain(model, chain_type="stuff", prompt=prompt)
         return chain
     except Exception as e:
