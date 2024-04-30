@@ -97,12 +97,14 @@ def get_conversational_chain(prompt):
             and include all relevant details from the document in your answers.
               """
 
-        prompt = PromptTemplate(template=prompt_template, input_variables=["context", "question"])
+        prompt_template_with_context = f"{prompt_template}\n\n{prompt}"
+        prompt = PromptTemplate(template=prompt_template_with_context, input_variables=["context", "question"])
         chain = load_qa_chain(model, chain_type="stuff", prompt=prompt)
         return chain
     except Exception as e:
         st.error(f"Error creating conversational chain: {e}")
         return None
+
 
 # Function to handle user input for PDF documents
 def user_input(user_question, pdf_docs, prompt):
